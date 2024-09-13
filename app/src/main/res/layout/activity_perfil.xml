@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".PerfilActivity">
+
+    <TextView
+        android:id="@+id/textViewNomeUsuario"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:paddingRight="10dp"
+        android:layout_marginTop="50dp"
+        android:text="Usuário:"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/nomeususario"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingRight="10dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/textViewNomeUsuario"
+        android:text="Nome:"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/nomeususario"
+        android:layout_centerHorizontal="true"
+        android:paddingRight="10dp"
+        android:text="ID:"
+        android:textSize="16sp" />
+
+    <!-- btnChangePassword -->
+    <RelativeLayout
+        android:id="@+id/btnChangePassword"
+        android:layout_width="328dp"
+        android:layout_height="53dp"
+        android:layout_below="@id/id"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/rounded_button_background">
+
+        <!-- Ícone -->
+        <ImageView
+            android:id="@+id/iconChangePassword"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="50dp"
+            android:src="@drawable/ic_change_password" />
+
+        <!-- Texto -->
+        <TextView
+            android:id="@+id/loginTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toEndOf="@id/iconChangePassword"
+            android:paddingStart="8dp"
+            android:paddingTop="12dp"
+            android:paddingBottom="12dp"
+            android:text="Alterar Senha"
+            android:textColor="#000000"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+    </RelativeLayout>
+
+    <!-- btnHelpSupport -->
+    <RelativeLayout
+        android:id="@+id/btnHelpSupport"
+        android:layout_width="328dp"
+        android:layout_height="53dp"
+        android:layout_below="@id/btnChangePassword"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/rounded_button_background">
+
+        <!-- Ícone -->
+        <ImageView
+            android:id="@+id/iconHelpSupport"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="50dp"
+            android:src="@drawable/ic_help_support" />
+
+        <!-- Texto -->
+        <TextView
+            android:id="@+id/HelpSupportTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toEndOf="@id/iconHelpSupport"
+            android:paddingStart="8dp"
+            android:paddingTop="12dp"
+            android:paddingBottom="12dp"
+            android:text="Ajuda e Suporte"
+            android:textColor="#000000"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+    </RelativeLayout>
+
+    <!-- btnAboutUs -->
+    <RelativeLayout
+        android:id="@+id/btnAboutUs"
+        android:layout_width="328dp"
+        android:layout_height="53dp"
+        android:layout_below="@id/btnHelpSupport"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/rounded_button_background">
+
+        <!-- Ícone -->
+        <ImageView
+            android:id="@+id/iconAboutUs"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="50dp"
+            android:src="@drawable/ic_about_us" />
+
+        <!-- Texto -->
+        <TextView
+            android:id="@+id/aboutUsTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toEndOf="@id/iconAboutUs"
+            android:paddingStart="8dp"
+            android:paddingTop="12dp"
+            android:paddingBottom="12dp"
+            android:text="Sobre Nós"
+            android:textColor="#000000"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+    </RelativeLayout>
+
+    <!-- btnLogout -->
+    <RelativeLayout
+        android:id="@+id/btnLogout"
+        android:layout_width="328dp"
+        android:layout_height="53dp"
+        android:layout_below="@id/btnAboutUs"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/rounded_rectangleredmodel2">
+
+        <!-- Ícone -->
+        <ImageView
+            android:id="@+id/iconLogout"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="50dp"
+            android:src="@drawable/ic_change_password" />
+
+        <!-- Texto -->
+        <TextView
+            android:id="@+id/logoutTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toEndOf="@id/iconLogout"
+            android:paddingStart="8dp"
+            android:paddingTop="12dp"
+            android:paddingBottom="12dp"
+            android:text="Sair do Aplicativo"
+            android:textColor="#000000"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+    </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/buttonVoltarHome"
+        android:layout_width="125px"
+        android:layout_height="125px"
+        android:layout_marginLeft="10px"
+        android:layout_marginTop="20px"
+        android:src="@drawable/setavoltar" />
+</RelativeLayout>

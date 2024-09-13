@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#FFFFFF"
+        android:padding="16dp">
+
+        <!-- Checklist-bro 1 -->
+        <ImageView
+            android:id="@+id/checklistBroImageView"
+            android:layout_width="364dp"
+            android:layout_height="365dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="-17px"
+            android:src="@drawable/loginbro" />
+
+        <!-- Username -->
+        <RelativeLayout
+            android:id="@+id/usernameLayout"
+            android:layout_width="328dp"
+            android:layout_height="64dp"
+            android:layout_marginTop="337dp"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/rounded_rectangle">
+
+            <!-- Rectangle 8 -->
+            <RelativeLayout
+                android:id="@+id/rectangle8Layout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/rounded_rectangle">
+
+                <!-- Username -->
+                <EditText
+                    android:id="@+id/usernameEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@android:color/transparent"
+                    android:gravity="center"
+                    android:hint="E-mail"
+                    android:textColor="#666666"
+                    android:textSize="14sp" />
+            </RelativeLayout>
+        </RelativeLayout>
+
+        <!-- Password -->
+        <RelativeLayout
+            android:id="@+id/passwordLayout"
+            android:layout_width="328dp"
+            android:layout_height="64dp"
+            android:layout_marginTop="425dp"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/rounded_rectangle">
+
+            <!-- Rectangle 8 -->
+            <RelativeLayout
+                android:id="@+id/rectangle8PasswordLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/rounded_rectangle">
+
+                <!-- Password -->
+                <EditText
+                    android:id="@+id/passwordEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:hint="Senha"
+                    android:textColor="#666666"
+                    android:textSize="14sp"
+                    android:inputType="textPassword"
+                    android:background="@android:color/transparent" />
+            </RelativeLayout>
+        </RelativeLayout>
+
+
+        <!-- Line 1 -->
+        <View
+            android:id="@+id/line1View"
+            android:layout_width="328dp"
+            android:layout_height="1px"
+            android:layout_marginTop="590dp"
+            android:background="#989E9D"
+            android:layout_centerHorizontal="true" />
+
+        <!-- Button Register -->
+        <RelativeLayout
+            android:id="@+id/registerButtonLayout"
+            android:layout_width="328dp"
+            android:layout_height="53dp"
+            android:layout_marginTop="600dp"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/rounded_rectangle">
+
+            <!-- Rectangle 10 -->
+            <RelativeLayout
+                android:id="@+id/rectangle10Layout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/rounded_button_background">
+
+                <!-- Register -->
+                <TextView
+                    android:id="@+id/registerTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="17dp"
+                    android:text="Cadastrar"
+                    android:textColor="#FFFFFF"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+            </RelativeLayout>
+        </RelativeLayout>
+
+        <!-- Login Title -->
+        <TextView
+            android:id="@+id/loginTitleTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="280dp"
+            android:text="Login"
+            android:textColor="#3D7268"
+            android:textSize="26sp"
+            android:textStyle="bold"
+            android:fontFamily="sans-serif-condensed" />
+
+        <!-- Login Button -->
+        <RelativeLayout
+            android:id="@+id/loginButtonLayout"
+            android:layout_width="328dp"
+            android:layout_height="53dp"
+            android:layout_marginTop="525dp"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/rounded_button_background">
+
+            <!-- Login -->
+            <TextView
+                android:id="@+id/loginTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="12dp"
+                android:layout_centerHorizontal="true"
+                android:text="Login"
+                android:textColor="#FFFFFF"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+        </RelativeLayout>
+
+    </RelativeLayout>
+</androidx.core.widget.NestedScrollView>

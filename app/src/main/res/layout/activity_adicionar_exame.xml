@@ -1,0 +1,218 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- Estrela de Favoritar -->
+    <ImageView
+        android:id="@+id/estrelaImageView"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_margin="16dp"
+        android:clickable="true"
+        android:contentDescription="Favoritar Tarefa"
+        android:src="@drawable/iconfav" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="22dp"
+        android:text="Cadastrar Novo Exame"
+        android:textSize="20sp"
+        android:textColor="#3D7268"
+        android:textStyle="bold" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/estrelaImageView">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <!-- Nome do Paciente -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Nome do Paciente:"
+                android:textSize="18sp"
+                android:textColor="#3D7268"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/nomePacienteEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Digite o nome do paciente"
+                android:background="@drawable/rounded_rectangle"
+                android:padding="8dp" />
+
+            <!-- CPF do Paciente -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="CPF do Paciente:"
+                android:textSize="18sp"
+                android:textColor="#3D7268"
+                android:textStyle="bold"
+                android:layout_marginTop="20dp" />
+
+            <EditText
+                android:id="@+id/cpfPacienteEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Digite o CPF do paciente"
+                android:background="@drawable/rounded_rectangle"
+                android:padding="8dp" />
+
+            <!-- Descrição do Exame -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Descrição do Exame:"
+                android:textSize="18sp"
+                android:textColor="#3D7268"
+                android:textStyle="bold"
+                android:layout_marginTop="20dp" />
+
+            <EditText
+                android:id="@+id/descricaoExameEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Digite a descrição do exame"
+                android:layout_marginTop="5dp"
+                android:gravity="top"
+                android:minLines="3"
+                android:background="@drawable/rounded_rectangle"
+                android:padding="16dp" />
+
+            <!-- Nome do Hospital -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Nome do Hospital:"
+                android:textSize="18sp"
+                android:textColor="#3D7268"
+                android:textStyle="bold"
+                android:layout_marginTop="20dp" />
+
+            <EditText
+                android:id="@+id/nomeHospitalEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Digite o nome do hospital"
+                android:background="@drawable/rounded_rectangle"
+                android:padding="8dp" />
+
+            <!-- Nome do Médico -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Nome do Médico:"
+                android:textSize="18sp"
+                android:textColor="#3D7268"
+                android:textStyle="bold"
+                android:layout_marginTop="20dp" />
+
+            <EditText
+                android:id="@+id/nomeMedicoEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Digite o nome do médico"
+                android:background="@drawable/rounded_rectangle"
+                android:padding="8dp" />
+
+            <!-- Data e Hora -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Data e Hora de Atendimento:"
+                android:textColor="#3D7268"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:layout_marginTop="20dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/dataEditText"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:hint="Data"
+                    android:inputType="none"
+                    android:focusable="false"
+                    android:onClick="mostrarDatePicker"
+                    android:background="@drawable/rounded_rectangle"
+                    android:padding="8dp" />
+
+                <EditText
+                    android:id="@+id/horaEditText"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:hint="Hora"
+                    android:inputType="none"
+                    android:focusable="false"
+                    android:onClick="mostrarTimePicker"
+                    android:background="@drawable/rounded_rectangle"
+                    android:padding="8dp" />
+            </LinearLayout>
+
+            <!-- Anexar Arquivo -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Anexar Arquivo:"
+                android:textSize="18sp"
+                android:textColor="#3D7268"
+                android:textStyle="bold"
+                android:layout_marginTop="20dp" />
+
+            <Button
+                android:id="@+id/anexarArquivoButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Selecionar Arquivo"
+                android:backgroundTint="#3D7268"
+                android:textColor="#FFFFFF"
+                android:layout_marginTop="5dp" />
+
+            <!-- Botões -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginTop="20dp">
+
+                <Button
+                    android:id="@+id/cancelarButton"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:backgroundTint="#9A9A9A"
+                    android:text="Cancelar" />
+
+                <Button
+                    android:id="@+id/salvarButton"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Salvar"
+                    android:backgroundTint="#3D7268" />
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+
+</RelativeLayout>

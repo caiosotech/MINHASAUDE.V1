@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Minha Saúde</string>
+    <string name="search_hint">Search...</string>
+    <string name="search_icon">Ícone de busca</string>
+</resources>

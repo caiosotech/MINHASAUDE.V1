@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:verticalScrollbarPosition="left">
+
+        <!-- Imagem no topo da tela -->
+        <ImageView
+            android:id="@+id/backgroundImageView"
+            android:layout_width="300dp"
+            android:layout_height="300dp"
+            android:layout_centerHorizontal="true"
+            android:adjustViewBounds="true"
+            android:scaleType="fitStart"
+            android:src="@drawable/checklistbro" />
+
+        <!-- Register Title -->
+        <TextView
+            android:id="@+id/registerTitleTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/backgroundImageView"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:layout_marginTop="10dp"
+            android:fontFamily="sans-serif-condensed"
+            android:text="Registrar-se como:"
+            android:textColor="#3D7268"
+            android:textSize="26sp"
+            android:textStyle="bold" />
+
+        <!-- Button Register Medico -->
+        <RelativeLayout
+            android:id="@+id/registerMedicoButton"
+            android:layout_width="328dp"
+            android:layout_height="53dp"
+            android:layout_below="@id/registerTitleTextView"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/rounded_button_background">
+
+            <TextView
+                android:id="@+id/loginTextViewMedico"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:padding="12dp"
+                android:text="Médico"
+                android:textColor="#FFFFFF"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+        </RelativeLayout>
+
+        <!-- Button Register Paciente -->
+        <RelativeLayout
+            android:id="@+id/registerPacienteButton"
+            android:layout_width="328dp"
+            android:layout_height="53dp"
+            android:layout_below="@id/registerMedicoButton"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/rounded_button_background">
+
+            <TextView
+                android:id="@+id/loginTextViewPaciente"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:padding="12dp"
+                android:text="Paciente"
+                android:textColor="#FFFFFF"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+        </RelativeLayout>
+
+        <!-- Botão Voltar -->
+        <ImageView
+            android:id="@+id/buttonVoltarRegister"
+            android:layout_width="125px"
+            android:layout_height="125px"
+            android:layout_marginLeft="10px"
+            android:layout_marginTop="20px"
+            app:srcCompat="@drawable/setavoltar" />
+
+    </RelativeLayout>
+</androidx.core.widget.NestedScrollView>

@@ -1,0 +1,26 @@
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Barra de navegação principal -->
+    <item>
+        <shape android:shape="rectangle">
+            <solid android:color="#FFFFFF"/> <!-- Cor de fundo branca -->
+            <corners android:radius="16dp"/> <!-- Cantos arredondados -->
+            <stroke
+                android:width="1dp"
+                android:color="#DDDDDD"/> <!-- Borda cinza clara -->
+            <padding
+                android:left="8dp"
+                android:top="4dp"
+                android:right="8dp"
+                android:bottom="4dp"/>
+        </shape>
+    </item>
+    <!-- Definindo a ondulação no meio da barra -->
+    <item>
+        <shape android:shape="rectangle">
+            <solid android:color="#FFFFFF"/>
+            <corners android:radius="12dp"/>
+            <padding android:left="8dp" android:right="8dp" android:top="12dp" android:bottom="4dp"/>
+            <stroke android:width="1dp" android:color="#DDDDDD" android:top="2dp"/> <!-- Borda superior -->
+        </shape>
+    </item>
+</layer-list>

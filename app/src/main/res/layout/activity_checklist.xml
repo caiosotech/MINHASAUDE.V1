@@ -1,0 +1,147 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    tools:context=".ChecklistMain">
+
+    <!-- Conteúdo principal -->
+    <LinearLayout
+        android:id="@+id/mainContent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_alignParentTop="true"
+        android:layout_above="@+id/navigationBar">
+
+        <!-- Search Bar -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:background="@drawable/search_background"
+            android:padding="8dp"
+            android:gravity="center_vertical"
+            android:layout_marginBottom="16dp">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_search"
+                android:contentDescription="@string/search_icon" />
+
+            <EditText
+                android:id="@+id/searchEditText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="@string/search_hint"
+                android:padding="12dp"
+                android:background="?android:attr/selectableItemBackground"
+                android:inputType="text"
+                android:imeOptions="actionSearch"/>
+        </LinearLayout>
+
+        <!-- Navigation Tabs (Top) -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"/>
+
+        <!-- List of Tasks -->
+        <ListView
+            android:id="@+id/listViewTarefas"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:divider="@null"
+            android:dividerHeight="0dp"
+            android:padding="8dp"
+            android:clipToPadding="false"
+            android:scrollbars="vertical"
+            android:layout_above="@id/navigationBar" />
+    </LinearLayout>
+
+    <!-- Bottom Navigation Bar -->
+    <RelativeLayout
+        android:id="@+id/navigationBar"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_alignParentBottom="true">
+
+        <!-- Background Image -->
+
+        <!-- Botões para o lado esquerdo -->
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:contentDescription="bar"
+            android:scaleType="fitXY"
+            android:src="@drawable/iconbar" />
+
+        <ImageView
+            android:id="@+id/iconHome"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="10dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:src="@drawable/iconhome"
+            android:contentDescription="Home" />
+
+        <ImageView
+            android:id="@+id/iconFav"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_toEndOf="@id/iconHome"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="10dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:src="@drawable/iconfav"
+            android:contentDescription="Favorite" />
+
+        <!-- Botões para o lado direito -->
+        <ImageView
+            android:id="@+id/iconPerfil"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="16dp"
+            android:layout_marginTop="10dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:src="@drawable/iconperfil"
+            android:contentDescription="perfil"/>
+
+        <ImageView
+            android:id="@+id/iconCalendario"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_toStartOf="@id/iconPerfil"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="16dp"
+            android:layout_marginTop="10dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:src="@drawable/iconcalendario"
+            android:contentDescription="calendario"/>
+
+        <!-- Add Task Button (Bottom) -->
+        <ImageView
+            android:id="@+id/imageBottom"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:src="@drawable/adicionaricon"
+            android:clickable="true"
+            android:focusable="true"
+            android:onClick="openAdicionarTarefaActivity"
+            android:contentDescription="Adicionar Tarefa" />
+    </RelativeLayout>
+</RelativeLayout>

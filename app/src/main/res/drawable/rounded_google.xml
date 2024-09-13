@@ -1,0 +1,34 @@
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Background (White) -->
+    <item>
+        <shape android:shape="rectangle">
+            <solid android:color="#FFFFFF" />
+            <corners android:radius="10dp" />
+        </shape>
+    </item>
+
+    <!-- Border (Light Gray) -->
+    <item android:right="1dp" android:left="1dp" android:bottom="2dp">
+        <shape android:shape="rectangle">
+            <solid android:color="#D3D3D3" /> <!-- Light Gray color for border -->
+            <corners android:radius="10dp" />
+        </shape>
+    </item>
+
+    <!-- Shadow (Transparent) -->
+    <item>
+        <shape android:shape="rectangle">
+            <solid android:color="@android:color/transparent" />
+            <corners android:radius="10dp" />
+        </shape>
+    </item>
+
+    <!-- Add a separate shape for shadow (White) -->
+    <item android:right="2dp" android:left="2dp" android:bottom="4dp">
+        <shape android:shape="rectangle">
+            <solid android:color="#FFFFFF" />
+            <corners android:radius="10dp" />
+        </shape>
+    </item>
+</layer-list>

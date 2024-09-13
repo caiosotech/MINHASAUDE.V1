@@ -1,0 +1,297 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:verticalScrollbarPosition="left">
+
+        <!-- Imagem no topo da tela -->
+        <ImageView
+            android:id="@+id/backgroundImageView"
+            android:layout_width="300dp"
+            android:layout_height="300dp"
+            android:layout_centerHorizontal="true"
+            android:adjustViewBounds="true"
+            android:scaleType="fitStart"
+            android:src="@drawable/paciente" />
+
+        <!-- Register Title -->
+        <TextView
+            android:id="@+id/registerTitleTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/backgroundImageView"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:fontFamily="sans-serif-condensed"
+            android:text="Registrar"
+            android:textColor="#3D7268"
+            android:textSize="26sp"
+            android:textStyle="bold" />
+
+        <!-- Nome Input -->
+        <RelativeLayout
+            android:id="@+id/nomeLayout"
+            android:layout_width="328dp"
+            android:layout_height="64dp"
+            android:layout_below="@id/registerTitleTextView"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="33dp"
+            android:layout_marginTop="10dp">
+
+            <!-- Rectangle 8 -->
+            <View
+                android:id="@+id/rectangle8_nome"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/rounded_rectangle" />
+
+            <!-- Nome EditText -->
+            <EditText
+                android:id="@+id/nomePacienteEditText"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="1dp"
+                android:layout_marginTop="1dp"
+                android:layout_marginEnd="1dp"
+                android:layout_marginBottom="1dp"
+                android:background="@drawable/rounded_rectangle"
+                android:hint="Nome"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                android:textColor="#666666" />
+        </RelativeLayout>
+
+        <!-- CPF Input -->
+        <RelativeLayout
+            android:id="@+id/cpfLayout"
+            android:layout_width="328dp"
+            android:layout_height="64dp"
+            android:layout_below="@id/nomeLayout"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="33dp"
+            android:layout_marginTop="10dp">
+
+            <!-- Rectangle 8 -->
+            <View
+                android:id="@+id/rectangle8_cpf"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/rounded_rectangle" />
+
+            <!-- CPF EditText -->
+            <EditText
+                android:id="@+id/cpfPacienteEditText"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="1dp"
+                android:layout_marginTop="1dp"
+                android:layout_marginEnd="1dp"
+                android:layout_marginBottom="1dp"
+                android:background="@drawable/rounded_rectangle"
+                android:hint="CPF"
+                android:inputType="number"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                android:textColor="#666666" />
+        </RelativeLayout>
+
+        <!-- RG Input -->
+        <RelativeLayout
+            android:id="@+id/rgLayout"
+            android:layout_width="328dp"
+            android:layout_height="64dp"
+            android:layout_below="@id/cpfLayout"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="33dp"
+            android:layout_marginTop="10dp">
+
+            <!-- Rectangle 8 -->
+            <View
+                android:id="@+id/rectangle8_rg"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/rounded_rectangle" />
+
+            <!-- RG EditText -->
+            <EditText
+                android:id="@+id/rgPacienteEditText"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="1dp"
+                android:layout_marginTop="1dp"
+                android:layout_marginEnd="1dp"
+                android:layout_marginBottom="1dp"
+                android:background="@drawable/rounded_rectangle"
+                android:hint="RG"
+                android:inputType="number"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                android:textColor="#666666" />
+        </RelativeLayout>
+
+        <!-- Email Input -->
+        <RelativeLayout
+            android:id="@+id/emailLayout"
+            android:layout_width="328dp"
+            android:layout_height="64dp"
+            android:layout_below="@id/rgLayout"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="33dp"
+            android:layout_marginTop="10dp">
+
+            <!-- Rectangle 8 -->
+            <View
+                android:id="@+id/rectangle8_email"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/rounded_rectangle" />
+
+            <!-- Email EditText -->
+            <EditText
+                android:id="@+id/emailPacienteEditText"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="1dp"
+                android:layout_marginTop="1dp"
+                android:layout_marginEnd="1dp"
+                android:layout_marginBottom="1dp"
+                android:background="@drawable/rounded_rectangle"
+                android:hint="Email"
+                android:inputType="textEmailAddress"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                android:textColor="#666666" />
+        </RelativeLayout>
+
+        <!-- Password Input -->
+        <RelativeLayout
+            android:id="@+id/passwordLayout"
+            android:layout_width="328dp"
+            android:layout_height="64dp"
+            android:layout_below="@id/emailLayout"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="33dp"
+            android:layout_marginTop="10dp">
+
+            <!-- Rectangle 8 -->
+            <View
+                android:id="@+id/rectangle8_password"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/rounded_rectangle" />
+
+            <!-- Password EditText -->
+            <EditText
+                android:id="@+id/passwordPacienteEditText"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="1dp"
+                android:layout_marginTop="1dp"
+                android:layout_marginEnd="1dp"
+                android:layout_marginBottom="1dp"
+                android:background="@drawable/rounded_rectangle"
+                android:hint="Password"
+                android:inputType="textPassword"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                android:textColor="#666666" />
+        </RelativeLayout>
+
+        <!-- Confirm Password Input -->
+        <RelativeLayout
+            android:id="@+id/confirmPasswordLayout"
+            android:layout_width="328dp"
+            android:layout_height="64dp"
+            android:layout_below="@id/passwordLayout"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="33dp"
+            android:layout_marginTop="10dp">
+
+            <!-- Rectangle 8 -->
+            <View
+                android:id="@+id/rectangle8_confirm_password"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/rounded_rectangle" />
+
+            <!-- Confirm Password EditText -->
+            <EditText
+                android:id="@+id/confirmPasswordPacienteEditText"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="1dp"
+                android:layout_marginTop="1dp"
+                android:layout_marginEnd="1dp"
+                android:layout_marginBottom="1dp"
+                android:background="@drawable/rounded_rectangle"
+                android:hint="Confirm Password"
+                android:inputType="textPassword"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                android:textColor="#666666" />
+        </RelativeLayout>
+
+        <!-- Terms of Use Layout -->
+        <RelativeLayout
+            android:id="@+id/termsLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/confirmPasswordLayout"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp">
+
+            <!-- Terms of Use CheckBox -->
+            <CheckBox
+                android:id="@+id/termsOfUseCheckBox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:padding="12dp" />
+
+            <!-- Terms of Use TextView -->
+            <TextView
+                android:id="@+id/termsOfUseTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minHeight="48dp"
+                android:minWidth="48dp"
+                android:layout_toRightOf="@id/termsOfUseCheckBox"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="13dp"
+                android:text="Li e aceito os Termos de Uso"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:textColor="@android:color/holo_orange_dark"
+                android:clickable="true"
+                android:focusable="true" />
+        </RelativeLayout>
+
+        <!-- Button Register -->
+        <Button
+            android:id="@+id/registerButton"
+            android:layout_width="328dp"
+            android:layout_height="53dp"
+            android:layout_below="@id/termsLayout"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/rounded_button_background"
+            android:text="Registrar"
+            android:textColor="#FFFFFF"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/buttonVoltarRegister"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="-5dp"
+            android:layout_marginTop="20dp"
+            app:srcCompat="@drawable/setavoltar" />
+    </RelativeLayout>
+</androidx.core.widget.NestedScrollView>

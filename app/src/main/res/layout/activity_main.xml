@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="match_parent"
+        android:layout_height="393dp"
+        android:layout_marginTop="30dp"
+        android:contentDescription="@string/app_name"
+        android:scaleType="centerCrop"
+        android:src="@drawable/minhasaude" />
+
+    <TextView
+        android:id="@+id/titleTextView"
+        android:layout_width="298dp"
+        android:layout_height="48dp"
+        android:layout_below="@id/imageView"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="10dp"
+        android:fontFamily="sans-serif-medium"
+        android:gravity="center"
+        android:text="MINHA SAÚDE"
+        android:textColor="#3E7168"
+        android:textSize="26sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/descriptionTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="81dp"
+        android:layout_alignTop="@+id/titleTextView"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="69dp"
+        android:layout_marginEnd="36dp"
+        android:fontFamily="sans-serif"
+        android:gravity="center"
+        android:lineSpacingMultiplier="1.5"
+        android:text="Seu bem-estar em primeiro lugar!"
+        android:textColor="#5E5A5A"
+        android:textSize="15sp"
+        android:textStyle="normal" />
+
+
+    <Button
+        android:id="@+id/startButton"
+        android:layout_width="328dp"
+        android:layout_height="58dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="50dp"
+        android:background="@drawable/rounded_button_background"
+        android:elevation="0dp"
+        android:fontFamily="sans-serif"
+        android:gravity="center"
+        android:padding="-10dp"
+        android:layout_above="@id/descriptionTextView"
+        android:text="Entrar"
+        android:textColor="#FFFFFF"
+        android:layout_marginTop="0dp"
+        android:textSize="14sp"
+        app:backgroundTint="@color/green"
+        android:textStyle="bold"
+        tools:ignore="TypographyContrast" />
+
+
+
+
+</RelativeLayout>
