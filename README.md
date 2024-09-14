@@ -1,24 +1,13 @@
-🚀 Animado para Compartilhar: Vídeo de Demonstração do Aplicativo TaskBro! 🚀
+🚀 Animado para Compartilhar: Vídeo de Demonstração do Aplicativo Minha Saúde! 🚀
 
-Olá, comunidade! Estou empolgado para apresentar a vocês o TaskBro, um aplicativo inovador de gerenciamento de tarefas e listas de verificação, projetado para ajudar os usuários 
-a organizar e administrar suas atividades diárias de forma eficiente e produtiva.
-
-📲 Assista ao Vídeo: [https://youtu.be/0qx4p7Rvr38]
-
-Neste vídeo, demonstro as principais funcionalidades do TaskBro, mostrando como ele pode ser seu parceiro confiável na busca pela produtividade e pela organização pessoal.
+Olá, comunidade! Estou empolgado para apresentar a vocês o Minha Saúde, um aplicativo inovador de análise de exames, projetado para facilitar o acesso e gerenciamento de resultados médicos, tanto para pacientes quanto para médicos.
 
 Principais Funcionalidades:
 
-  Criação e Gestão de Tarefas: Adicione, edite e acompanhe suas tarefas com facilidade.
-  Listas de Verificação Personalizáveis: Crie listas adaptadas às suas necessidades específicas.
-  Notificações e Lembretes: Receba alertas para não perder prazos importantes.
-  Interface Intuitiva: Navegação simples e amigável para uma experiência de usuário otimizada.
-
-
-Por que o TaskBro?
-O TaskBro é mais do que apenas um aplicativo de tarefas; é uma ferramenta criada para capacitar os usuários a manterem-se no controle de suas agendas e alcançarem seus objetivos de maneira tranquila. 
-Seja gerenciando tarefas pessoais ou profissionais, o TaskBro foi projetado para tornar sua vida mais fácil e organizada.
+Postagem e Gestão de Exames: Médicos podem adicionar, editar e organizar os exames de seus pacientes de maneira centralizada.
+Consulta Fácil: Pacientes acessam rapidamente seus exames médicos e podem compartilhar ou baixar resultados conforme necessário.
+Notificações e Lembretes: Alertas para que pacientes e médicos fiquem informados sobre novos exames ou prazos importantes.
+Interface Intuitiva: Navegação simples e amigável, facilitando o acesso às informações de saúde.
+Por que o Minha Saúde? O Minha Saúde vai além de um simples sistema de exames; é uma ferramenta projetada para facilitar o acesso rápido e eficiente às informações médicas. Médicos têm controle centralizado sobre os exames dos pacientes, e pacientes mantêm-se informados e organizados sobre sua saúde. Seja para consultas de rotina ou diagnósticos mais específicos, o Minha Saúde foi criado para tornar o gerenciamento de exames mais prático.
 
 Estou animado para compartilhar este projeto com todos vocês e adoraria ouvir seus pensamentos e feedback!
-
-
