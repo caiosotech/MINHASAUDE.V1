@@ -1,26 +1,28 @@
 package com.example.checklist;
 
-import android.content.Context;
 import android.content.ContentValues;
+import android.content.Context;
 import android.database.Cursor;
+import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class ExameDAO extends SQLiteOpenHelper {
 
-    private static final String DATABASE_NAME = "checklist.db";
-    private static final int DATABASE_VERSION = 12; // Incrementa a versão para atualização
+    private static final String DATABASE_NAME = "exames.db";
+    private static final int DATABASE_VERSION = 17;
 
-    // Nomes das tabelas e colunas
     private static final String TABLE_EXAMES = "exames";
     private static final String COLUMN_ID = "id";
-    private static final String COLUMN_NOME_EXAME = "nome_exame";
-    private static final String COLUMN_DATA = "data";
     private static final String COLUMN_NOME_HOSPITAL = "nome_hospital";
+    private static final String COLUMN_PACIENTE_CPF = "paciente_cpf";
+    private static final String COLUMN_DATA = "data";
+    private static final String COLUMN_NOME_EXAME = "nome_exame";
     private static final String COLUMN_MEDICO_EMAIL = "medico_email";
-    private static final String COLUMN_PACIENTE_CPF = "paciente_cpf"; // Novo campo
 
     public ExameDAO(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -28,144 +30,188 @@ public class ExameDAO extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        // Criação das tabelas
-        String CREATE_EXAMES_TABLE = "CREATE TABLE " + TABLE_EXAMES + " (" +
-                COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                COLUMN_NOME_EXAME + " TEXT, " +
-                COLUMN_DATA + " TEXT, " +
-                COLUMN_NOME_HOSPITAL + " TEXT, " +
-                COLUMN_MEDICO_EMAIL + " TEXT, " +
-                COLUMN_PACIENTE_CPF + " TEXT)";
-        db.execSQL(CREATE_EXAMES_TABLE);
+        String CREATE_TABLE = "CREATE TABLE " + TABLE_EXAMES + "("
+                + COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+                + COLUMN_NOME_HOSPITAL + " TEXT, "
+                + COLUMN_PACIENTE_CPF + " TEXT, "
+                + COLUMN_DATA + " TEXT, "
+                + COLUMN_NOME_EXAME + " TEXT, "
+                + COLUMN_MEDICO_EMAIL + " TEXT"
+                + ")";
+        db.execSQL(CREATE_TABLE);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        if (oldVersion < 6) {
-            // Atualiza a tabela de exames adicionando o campo nome_hospital
-            db.execSQL("ALTER TABLE " + TABLE_EXAMES + " ADD COLUMN " + COLUMN_NOME_HOSPITAL + " TEXT");
-            db.execSQL("ALTER TABLE " + TABLE_EXAMES + " ADD COLUMN " + COLUMN_PACIENTE_CPF + " TEXT");
-        }
-        // Aqui você pode adicionar mais condições de upgrade para versões futuras
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_EXAMES);
+        onCreate(db);
     }
 
-    /**
-     * Adiciona um novo exame ao banco de dados.
-     */
-    public void addExame(Exame exame) {
+    public void adicionarExame(Exame exame) {
         SQLiteDatabase db = this.getWritableDatabase();
-
         ContentValues values = new ContentValues();
-        values.put(COLUMN_NOME_EXAME, exame.getNomeExame());
-        values.put(COLUMN_DATA, exame.getData());
         values.put(COLUMN_NOME_HOSPITAL, exame.getNomeHospital());
+        values.put(COLUMN_PACIENTE_CPF, exame.getPacienteCPF());
+        values.put(COLUMN_DATA, exame.getData());
+        values.put(COLUMN_NOME_EXAME, exame.getNomeExame());
         values.put(COLUMN_MEDICO_EMAIL, exame.getMedicoEmail());
-        values.put(COLUMN_PACIENTE_CPF, exame.getPacienteCPF()); // Adiciona o CPF do paciente
-
-        db.insert(TABLE_EXAMES, null, values);
-        db.close();
+        Log.d("ExameDAO", "Adicionando exame: " +
+                "NomeExame: " + exame.getNomeExame() + ", " +
+                "Data: " + exame.getData() + ", " +
+                "NomeHospital: " + exame.getNomeHospital() + ", " +
+                "MedicoEmail: " + exame.getMedicoEmail() + ", " +
+                "PacienteCPF: " + exame.getPacienteCPF());
+        try {
+            db.insert(TABLE_EXAMES, null, values);
+        } catch (SQLException e) {
+            Log.e("ExameDAO", "Error inserting exam: " + e.getMessage());
+        } finally {
+            db.close();
+        }
     }
 
-    /**
-     * Obtém a lista de exames associados ao e-mail do médico.
-     */
+    public Cursor getAllExames() {
+        SQLiteDatabase db = this.getReadableDatabase();
+        return db.rawQuery("SELECT * FROM " + TABLE_EXAMES, null);
+    }
+
+    public Exame getExameById(int id) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.query(TABLE_EXAMES,
+                new String[]{COLUMN_ID, COLUMN_NOME_HOSPITAL, COLUMN_PACIENTE_CPF, COLUMN_DATA, COLUMN_NOME_EXAME, COLUMN_MEDICO_EMAIL},
+                COLUMN_ID + "=?",
+                new String[]{String.valueOf(id)},
+                null, null, null, null);
+
+        if (cursor != null && cursor.moveToFirst()) {
+            Exame exame = new Exame(
+                    cursor.getInt(cursor.getColumnIndexOrThrow(COLUMN_ID)),
+                    cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_NOME_HOSPITAL)),
+                    cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_PACIENTE_CPF)),
+                    cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_DATA)),
+                    cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_NOME_EXAME)),
+                    cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_MEDICO_EMAIL))
+            );
+            cursor.close();
+            return exame;
+        }
+        return null;
+    }
+
+    public int updateExame(Exame exame) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_NOME_HOSPITAL, exame.getNomeHospital());
+        values.put(COLUMN_PACIENTE_CPF, exame.getPacienteCPF());
+        values.put(COLUMN_DATA, exame.getData());
+        values.put(COLUMN_NOME_EXAME, exame.getNomeExame());
+        values.put(COLUMN_MEDICO_EMAIL, exame.getMedicoEmail());
+
+        return db.update(TABLE_EXAMES, values, COLUMN_ID + " = ?", new String[]{String.valueOf(exame.getId())});
+    }
+
     public List<Exame> obterExamesDoMedico(String medicoEmail) {
-        List<Exame> exames = new ArrayList<>();
+        List<Exame> listaExames = new ArrayList<>();
         SQLiteDatabase db = this.getReadableDatabase();
 
-        String SELECT_EXAMES_BY_MEDICO = "SELECT * FROM " + TABLE_EXAMES + " WHERE " + COLUMN_MEDICO_EMAIL + " = ?";
-        Cursor cursor = db.rawQuery(SELECT_EXAMES_BY_MEDICO, new String[]{medicoEmail});
+        // Realiza a consulta com base no e-mail do médico
+        Cursor cursor = db.query(TABLE_EXAMES,
+                new String[]{COLUMN_ID, COLUMN_NOME_HOSPITAL, COLUMN_PACIENTE_CPF, COLUMN_DATA, COLUMN_NOME_EXAME, COLUMN_MEDICO_EMAIL},
+                COLUMN_MEDICO_EMAIL + "=?",
+                new String[]{medicoEmail},
+                null, null, null);
 
-        int dataIndex = cursor.getColumnIndex(COLUMN_DATA);
-        int nomeHospitalIndex = cursor.getColumnIndex(COLUMN_NOME_HOSPITAL);
-        int nomeExameIndex = cursor.getColumnIndex(COLUMN_NOME_EXAME);
-        int medicoEmailIndex = cursor.getColumnIndex(COLUMN_MEDICO_EMAIL);
-        int pacienteCpfIndex = cursor.getColumnIndex(COLUMN_PACIENTE_CPF);
+        Log.d("ExameDAO", "Consultando exames para o e-mail do médico: " + medicoEmail);
 
-        if (cursor.moveToFirst()) {
+        if (cursor != null && cursor.moveToFirst()) {
             do {
-                String data = cursor.getString(dataIndex);
-                String nomeHospital = cursor.getString(nomeHospitalIndex);
-                String nomeExame = cursor.getString(nomeExameIndex);
-                String emailMedico = cursor.getString(medicoEmailIndex);
-                String pacienteCpf = cursor.getString(pacienteCpfIndex);
-
-                Exame exame = new Exame(nomeExame, data, nomeHospital, emailMedico, pacienteCpf);
-                exames.add(exame);
+                Exame exame = new Exame(
+                        cursor.getInt(cursor.getColumnIndexOrThrow(COLUMN_ID)),
+                        cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_NOME_HOSPITAL)),
+                        cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_PACIENTE_CPF)),
+                        cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_DATA)),
+                        cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_NOME_EXAME)),
+                        cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_MEDICO_EMAIL))
+                );
+                listaExames.add(exame);
+                Log.d("ExameDAO", "Exame encontrado: " + exame.getNomeExame());
             } while (cursor.moveToNext());
+        } else {
+            Log.d("ExameDAO", "Nenhum exame encontrado para o e-mail do médico.");
         }
 
-        cursor.close();
-        db.close();
-        return exames;
+        if (cursor != null) {
+            cursor.close();
+        }
+
+        return listaExames;
     }
 
-    /**
-     * Obtém a lista de exames associados ao CPF do paciente.
-     */
     public List<Exame> obterExamesDoPaciente(String pacienteCPF) {
-        List<Exame> exames = new ArrayList<>();
+        List<Exame> listaExames = new ArrayList<>();
         SQLiteDatabase db = this.getReadableDatabase();
 
-        String SELECT_EXAMES_BY_PACIENTE = "SELECT * FROM " + TABLE_EXAMES + " WHERE " + COLUMN_PACIENTE_CPF + " = ?";
-        Cursor cursor = db.rawQuery(SELECT_EXAMES_BY_PACIENTE, new String[]{pacienteCPF});
+        Cursor cursor = db.query(TABLE_EXAMES,
+                new String[]{COLUMN_ID, COLUMN_NOME_HOSPITAL, COLUMN_PACIENTE_CPF, COLUMN_DATA, COLUMN_NOME_EXAME, COLUMN_MEDICO_EMAIL},
+                COLUMN_PACIENTE_CPF + "=?",
+                new String[]{pacienteCPF},
+                null, null, null);
 
-        int dataIndex = cursor.getColumnIndex(COLUMN_DATA);
-        int nomeHospitalIndex = cursor.getColumnIndex(COLUMN_NOME_HOSPITAL);
-        int nomeExameIndex = cursor.getColumnIndex(COLUMN_NOME_EXAME);
-        int medicoEmailIndex = cursor.getColumnIndex(COLUMN_MEDICO_EMAIL);
-        int pacienteCpfIndex = cursor.getColumnIndex(COLUMN_PACIENTE_CPF);
-
-        if (cursor.moveToFirst()) {
+        if (cursor != null && cursor.moveToFirst()) {
             do {
-                String data = cursor.getString(dataIndex);
-                String nomeHospital = cursor.getString(nomeHospitalIndex);
-                String nomeExame = cursor.getString(nomeExameIndex);
-                String emailMedico = cursor.getString(medicoEmailIndex);
-                String cpfPaciente = cursor.getString(pacienteCpfIndex);
-
-                Exame exame = new Exame(nomeExame, data, nomeHospital, emailMedico, cpfPaciente);
-                exames.add(exame);
+                Exame exame = new Exame(
+                        cursor.getInt(cursor.getColumnIndexOrThrow(COLUMN_ID)),
+                        cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_NOME_HOSPITAL)),
+                        cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_PACIENTE_CPF)),
+                        cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_DATA)),
+                        cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_NOME_EXAME)),
+                        cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_MEDICO_EMAIL))
+                );
+                listaExames.add(exame);
             } while (cursor.moveToNext());
         }
 
-        cursor.close();
-        db.close();
-        return exames;
+        if (cursor != null) {
+            cursor.close();
+        }
+
+        return listaExames;
     }
 
-    /**
-     * Busca exames com base na consulta fornecida.
-     */
     public List<Exame> buscarExamesPorConsulta(String query) {
-        List<Exame> exames = new ArrayList<>();
+        List<Exame> listaExames = new ArrayList<>();
         SQLiteDatabase db = this.getReadableDatabase();
 
-        String SELECT_EXAMES_BY_QUERY = "SELECT * FROM " + TABLE_EXAMES +
-                " WHERE " + COLUMN_NOME_EXAME + " LIKE ? OR " + COLUMN_NOME_HOSPITAL + " LIKE ?";
-        Cursor cursor = db.rawQuery(SELECT_EXAMES_BY_QUERY, new String[]{"%" + query + "%", "%" + query + "%"});
+        Cursor cursor = db.query(TABLE_EXAMES,
+                new String[]{COLUMN_ID, COLUMN_NOME_HOSPITAL, COLUMN_PACIENTE_CPF, COLUMN_DATA, COLUMN_NOME_EXAME, COLUMN_MEDICO_EMAIL},
+                COLUMN_NOME_EXAME + " LIKE ? OR " + COLUMN_DATA + " LIKE ?",
+                new String[]{"%" + query + "%", "%" + query + "%"},
+                null, null, null);
 
-        int dataIndex = cursor.getColumnIndex(COLUMN_DATA);
-        int nomeHospitalIndex = cursor.getColumnIndex(COLUMN_NOME_HOSPITAL);
-        int nomeExameIndex = cursor.getColumnIndex(COLUMN_NOME_EXAME);
-        int medicoEmailIndex = cursor.getColumnIndex(COLUMN_MEDICO_EMAIL);
-        int pacienteCpfIndex = cursor.getColumnIndex(COLUMN_PACIENTE_CPF);
-
-        if (cursor.moveToFirst()) {
+        if (cursor != null && cursor.moveToFirst()) {
             do {
-                String data = cursor.getString(dataIndex);
-                String nomeHospital = cursor.getString(nomeHospitalIndex);
-                String nomeExame = cursor.getString(nomeExameIndex);
-                String emailMedico = cursor.getString(medicoEmailIndex);
-                String cpfPaciente = cursor.getString(pacienteCpfIndex);
-
-                Exame exame = new Exame(nomeExame, data, nomeHospital, emailMedico, cpfPaciente);
-                exames.add(exame);
+                Exame exame = new Exame(
+                        cursor.getInt(cursor.getColumnIndexOrThrow(COLUMN_ID)),
+                        cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_NOME_HOSPITAL)),
+                        cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_PACIENTE_CPF)),
+                        cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_DATA)),
+                        cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_NOME_EXAME)),
+                        cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_MEDICO_EMAIL))
+                );
+                listaExames.add(exame);
             } while (cursor.moveToNext());
         }
 
-        cursor.close();
+        if (cursor != null) {
+            cursor.close();
+        }
+
+        return listaExames;
+    }
+
+    public void deleteExame(int id) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(TABLE_EXAMES, COLUMN_ID + " = ?", new String[]{String.valueOf(id)});
         db.close();
-        return exames;
     }
 }

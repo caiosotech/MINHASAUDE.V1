@@ -5,6 +5,7 @@ import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -53,8 +54,11 @@ public class AdicionarExameActivity extends AppCompatActivity {
         // Inicializa o ExameDAO
         exameDAO = new ExameDAO(this);
 
-        // Receba o e-mail do médico logado
+        // Recebe o e-mail do médico logado
         medicoEmail = getIntent().getStringExtra("MEDICO_EMAIL");
+
+        // Adicione um log para verificar o e-mail do médico recebido
+        Log.d("AdicionarExameActivity", "E-mail do médico recebido: " + medicoEmail);
 
         // Configura os listeners
         dataEditText.setOnClickListener(v -> showDatePicker());
@@ -118,20 +122,23 @@ public class AdicionarExameActivity extends AppCompatActivity {
         String data = dataEditText.getText().toString().trim();
         String hora = horaEditText.getText().toString().trim();
 
-        // Verifique se os campos obrigatórios estão preenchidos
         if (nomePaciente.isEmpty() || cpfPaciente.isEmpty() || descricaoExame.isEmpty() ||
                 nomeHospital.isEmpty() || nomeMedico.isEmpty() || data.isEmpty() || hora.isEmpty()) {
             Toast.makeText(this, "Por favor, preencha todos os campos.", Toast.LENGTH_SHORT).show();
             return;
         }
 
-        // Cria o objeto Exame com os dados do paciente e do médico
-        Exame exame = new Exame(descricaoExame, data, nomeHospital, medicoEmail, cpfPaciente); // Ajustado para cinco parâmetros
-        exameDAO.addExame(exame);
+        Exame exame = new Exame(descricaoExame, data, nomeHospital, medicoEmail, cpfPaciente);
+        exameDAO.adicionarExame(exame);
 
+        // Define o resultado para indicar que a lista precisa ser atualizada
+        Intent resultIntent = new Intent();
+        resultIntent.putExtra("EXAME_ADICIONADO", true);
+        setResult(RESULT_OK, resultIntent);
         Toast.makeText(this, "Exame salvo com sucesso!", Toast.LENGTH_SHORT).show();
         finish();  // Fecha a activity após salvar o exame
     }
+
 
     private void toggleFavorito() {
         // Adicione a lógica para favoritar ou desfavoritar o exame

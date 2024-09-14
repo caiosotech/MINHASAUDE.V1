@@ -7,7 +7,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 public class DatabaseHelper extends SQLiteOpenHelper {
 
     private static final String DATABASE_NAME = "checklist.db";
-    private static final int DATABASE_VERSION = 12; // Versão atual do banco de dados
+    private static final int DATABASE_VERSION = 17; // Versão atual do banco de dados
 
     // Nome das tabelas
     public static final String TABLE_MEDICO = "medico";
@@ -35,40 +35,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     // Colunas da tabela Exames
     public static final String COLUMN_EXAME_ID = "id";
-    public static final String COLUMN_EXAME_NOME = "nome";
+    public static final String COLUMN_EXAME_NOME = "nome_exame";
     public static final String COLUMN_EXAME_DATA = "data";
+    public static final String COLUMN_EXAME_NOME_HOSPITAL = "nome_hospital";
     public static final String COLUMN_EXAME_MEDICO_EMAIL = "medico_email";
-    public static final String COLUMN_EXAME_NOME_HOSPITAL = "nome_hospital"; // Adicionando a coluna nome_hospital
-
-    private static final String TABLE_CREATE_MEDICO = "CREATE TABLE " + TABLE_MEDICO + " (" +
-            COLUMN_MEDICO_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
-            COLUMN_MEDICO_NOME + " TEXT NOT NULL, " +
-            COLUMN_MEDICO_CPF + " TEXT NOT NULL UNIQUE, " +
-            COLUMN_MEDICO_RG + " TEXT NOT NULL, " +
-            COLUMN_MEDICO_CRM + " TEXT NOT NULL UNIQUE, " +
-            COLUMN_MEDICO_EMAIL + " TEXT NOT NULL UNIQUE, " +
-            COLUMN_MEDICO_SENHA + " TEXT NOT NULL, " +
-            COLUMN_MEDICO_TIPO_USUARIO + " TEXT NOT NULL" +
-            ");";
-
-    private static final String TABLE_CREATE_PACIENTE = "CREATE TABLE " + TABLE_PACIENTE + " (" +
-            COLUMN_PACIENTE_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
-            COLUMN_PACIENTE_NOME + " TEXT NOT NULL, " +
-            COLUMN_PACIENTE_CPF + " TEXT NOT NULL UNIQUE, " +
-            COLUMN_PACIENTE_RG + " TEXT NOT NULL, " +
-            COLUMN_PACIENTE_EMAIL + " TEXT NOT NULL UNIQUE, " +
-            COLUMN_PACIENTE_SENHA + " TEXT NOT NULL, " +
-            COLUMN_PACIENTE_TIPO_USUARIO + " TEXT NOT NULL" +
-            ");";
-
-    private static final String TABLE_CREATE_EXAMES = "CREATE TABLE " + TABLE_EXAMES + " (" +
-            COLUMN_EXAME_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
-            COLUMN_EXAME_NOME + " TEXT NOT NULL, " +
-            COLUMN_EXAME_DATA + " TEXT NOT NULL, " +
-            COLUMN_EXAME_MEDICO_EMAIL + " TEXT NOT NULL, " +
-            COLUMN_EXAME_NOME_HOSPITAL + " TEXT NOT NULL, " + // Adicionando a coluna nome_hospital
-            "FOREIGN KEY(" + COLUMN_EXAME_MEDICO_EMAIL + ") REFERENCES " + TABLE_MEDICO + "(" + COLUMN_MEDICO_EMAIL + ")" +
-            ");";
+    public static final String COLUMN_EXAME_PACIENTE_CPF = "paciente_cpf"; // Novo campo para o CPF
 
     public DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -76,16 +47,46 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL(TABLE_CREATE_MEDICO);
-        db.execSQL(TABLE_CREATE_PACIENTE);
-        db.execSQL(TABLE_CREATE_EXAMES);
+        // Criar tabelas no banco de dados
+        String CREATE_MEDICO_TABLE = "CREATE TABLE " + TABLE_MEDICO + " (" +
+                COLUMN_MEDICO_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                COLUMN_MEDICO_NOME + " TEXT, " +
+                COLUMN_MEDICO_CPF + " TEXT, " +
+                COLUMN_MEDICO_RG + " TEXT, " +
+                COLUMN_MEDICO_CRM + " TEXT, " +
+                COLUMN_MEDICO_EMAIL + " TEXT, " +
+                COLUMN_MEDICO_SENHA + " TEXT, " +
+                COLUMN_MEDICO_TIPO_USUARIO + " TEXT)";
+
+        String CREATE_PACIENTE_TABLE = "CREATE TABLE " + TABLE_PACIENTE + " (" +
+                COLUMN_PACIENTE_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                COLUMN_PACIENTE_NOME + " TEXT, " +
+                COLUMN_PACIENTE_CPF + " TEXT, " +
+                COLUMN_PACIENTE_RG + " TEXT, " +
+                COLUMN_PACIENTE_EMAIL + " TEXT, " +
+                COLUMN_PACIENTE_SENHA + " TEXT, " +
+                COLUMN_PACIENTE_TIPO_USUARIO + " TEXT)";
+
+        String CREATE_EXAMES_TABLE = "CREATE TABLE " + TABLE_EXAMES + " (" +
+                COLUMN_EXAME_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                COLUMN_EXAME_NOME + " TEXT, " +
+                COLUMN_EXAME_DATA + " TEXT, " +
+                COLUMN_EXAME_NOME_HOSPITAL + " TEXT, " +
+                COLUMN_EXAME_MEDICO_EMAIL + " TEXT, " +
+                COLUMN_EXAME_PACIENTE_CPF + " TEXT)"; // Campo CPF do paciente adicionado
+
+        // Executar as instruções de criação de tabelas
+        db.execSQL(CREATE_MEDICO_TABLE);
+        db.execSQL(CREATE_PACIENTE_TABLE);
+        db.execSQL(CREATE_EXAMES_TABLE);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        if (oldVersion < 10) { // Atualizar para a versão 10
-            db.execSQL("ALTER TABLE " + TABLE_EXAMES + " ADD COLUMN " + COLUMN_EXAME_NOME_HOSPITAL + " TEXT NOT NULL DEFAULT '';"); // Adiciona a nova coluna
+        // Verificar se alguma atualização é necessária
+        if (oldVersion < 13) {
+            // Atualizar tabela exames para incluir o campo CPF do paciente
+            db.execSQL("ALTER TABLE " + TABLE_EXAMES + " ADD COLUMN " + COLUMN_EXAME_PACIENTE_CPF + " TEXT");
         }
-        // Adicione outras instruções de atualização aqui se houver mais versões e alterações
     }
 }

@@ -66,11 +66,18 @@ public class MedicoDAO {
             values.put(COLUMN_CPF, medico.getCpf());
             values.put(COLUMN_RG, medico.getRg());
             values.put(COLUMN_CRM, medico.getCrm());
-            values.put(COLUMN_EMAIL, medico.getEmail());
+
+            // Certifique-se de que `medico.getEmail()` não é null
+            String email = medico.getEmail();
+            if (email == null) {
+                Log.w(TAG, "E-mail do médico é null, inserindo como valor null no banco de dados.");
+            }
+            values.put(COLUMN_EMAIL, email);
+
             values.put(COLUMN_SENHA, medico.getSenha());
             values.put(COLUMN_TIPO_USUARIO, medico.getTipoUsuario());
 
-            id = database.insert(TABLE_MEDICO, null, values); // Corrija o nome da tabela se necessário
+            id = database.insert(TABLE_MEDICO, null, values); // Inserção no banco de dados
         } catch (SQLException e) {
             Log.e(TAG, "Erro ao inserir médico: " + e.getMessage());
         }

@@ -6,7 +6,7 @@
     android:padding="16dp"
     tools:context=".MedicoMainActivity">
 
-    <!-- Conteúdo principal -->
+    <!-- ConteÃºdo principal -->
     <LinearLayout
         android:id="@+id/mainContent"
         android:layout_width="match_parent"

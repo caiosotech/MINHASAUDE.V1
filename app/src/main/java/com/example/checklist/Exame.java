@@ -1,13 +1,24 @@
 package com.example.checklist;
 
 public class Exame {
+    private int id;
     private String nomeExame;
     private String data;
     private String nomeHospital;
     private String medicoEmail;
     private String pacienteCPF;
 
-    // Construtor com cinco parâmetros
+    // Construtor com todos os parâmetros (incluindo o 'id')
+    public Exame(int id, String nomeExame, String data, String nomeHospital, String medicoEmail, String pacienteCPF) {
+        this.id = id;
+        this.nomeExame = nomeExame;
+        this.data = data;
+        this.nomeHospital = nomeHospital;
+        this.medicoEmail = medicoEmail;
+        this.pacienteCPF = pacienteCPF;
+    }
+
+    // Construtor sem o 'id' para novos registros
     public Exame(String nomeExame, String data, String nomeHospital, String medicoEmail, String pacienteCPF) {
         this.nomeExame = nomeExame;
         this.data = data;
@@ -17,6 +28,14 @@ public class Exame {
     }
 
     // Getters e setters
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public String getNomeExame() {
         return nomeExame;
     }
@@ -55,15 +74,5 @@ public class Exame {
 
     public void setPacienteCPF(String pacienteCPF) {
         this.pacienteCPF = pacienteCPF;
-    }
-
-    // Método fictício para obter o nome do médico, ajustado conforme necessário
-    public String getNomeMedico() {
-        return "Nome do Médico"; // Retorne o nome real do médico, se possível
-    }
-
-    // Método fictício para obter o nome do paciente, ajustado conforme necessário
-    public String getNomePaciente() {
-        return "Nome do Paciente"; // Retorne o nome real do paciente, se possível
     }
 }

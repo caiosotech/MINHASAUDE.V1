@@ -1,12 +1,15 @@
 package com.example.checklist;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.example.checklist.Exame;
 
 import java.util.List;
 
@@ -29,22 +32,39 @@ public class ExameAdapter extends ArrayAdapter<Exame> {
 
         Exame exame = exames.get(position);
 
-        TextView dateTextView = convertView.findViewById(R.id.dateTextView);
-        TextView hospitalTextView = convertView.findViewById(R.id.hospitalTextView);
-        TextView exameTextView = convertView.findViewById(R.id.exameTextView);
-        TextView medicoTextView = convertView.findViewById(R.id.medicoTextView);
-        ImageView favoriteImageView = convertView.findViewById(R.id.favoriteImageView);
-        ImageView favoriteRedImageView = convertView.findViewById(R.id.favoriteRedImageView);
+        // Verificar se exame não é null
+        if (exame != null) {
+            TextView dateTextView = convertView.findViewById(R.id.dateTextView);
+            TextView hospitalTextView = convertView.findViewById(R.id.hospitalTextView);
+            TextView exameTextView = convertView.findViewById(R.id.exameTextView);
+            TextView medicoTextView = convertView.findViewById(R.id.medicoTextView);
+            ImageView favoriteImageView = convertView.findViewById(R.id.favoriteImageView);
+            ImageView favoriteRedImageView = convertView.findViewById(R.id.favoriteRedImageView);
 
-        // Definindo os valores dos TextViews com base nos métodos da classe Exame
-        dateTextView.setText(exame.getData());
-        hospitalTextView.setText(exame.getNomeHospital());
-        exameTextView.setText(exame.getNomeExame());
-        medicoTextView.setText(exame.getMedicoEmail()); // Ajusta para mostrar o email do médico
+            // Definindo os valores dos TextViews com base nos métodos da classe Exame
+            if (dateTextView != null) {
+                dateTextView.setText(exame.getData());
+            }
+            if (hospitalTextView != null) {
+                hospitalTextView.setText(exame.getNomeHospital());
+            }
+            if (exameTextView != null) {
+                exameTextView.setText(exame.getNomeExame());
+            }
+            if (medicoTextView != null) {
+                medicoTextView.setText(exame.getMedicoEmail());
+            }
 
-        // Lógica de visibilidade dos ícones de favoritos
-        favoriteImageView.setVisibility(View.VISIBLE);
-        favoriteRedImageView.setVisibility(View.INVISIBLE);
+            // Lógica de visibilidade dos ícones de favoritos
+            if (favoriteImageView != null) {
+                favoriteImageView.setVisibility(View.VISIBLE);
+            }
+            if (favoriteRedImageView != null) {
+                favoriteRedImageView.setVisibility(View.INVISIBLE);
+            }
+        } else {
+            Log.e("ExameAdapter", "Exame at position " + position + " is null");
+        }
 
         return convertView;
     }

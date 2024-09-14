@@ -62,7 +62,7 @@ public class LoginActivity extends AppCompatActivity {
             if (medico.getSenha().equals(password)) {
                 // Redirecionar para a página principal do médico
                 Intent intent = new Intent(LoginActivity.this, MedicoMainActivity.class);
-                intent.putExtra("email_medico", email); // Passa o e-mail do médico para a atividade principal
+                intent.putExtra("medico_email", email); // Passa o e-mail do médico para a atividade principal
                 startActivity(intent);
                 finish();
                 return; // Se médico for encontrado e autenticado, sair da função

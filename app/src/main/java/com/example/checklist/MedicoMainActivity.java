@@ -1,8 +1,6 @@
 package com.example.checklist;
 
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -16,12 +14,15 @@ import java.util.List;
 public class MedicoMainActivity extends AppCompatActivity {
 
     private static final String TAG = "MedicoMainActivity";
+    private static final int ADD_EXAM_REQUEST_CODE = 1; // Código de solicitação para adicionar exame
+
     private ImageView iconHome, iconPerfil, imageBottom;
     private ListView listViewExames;
     private ExameAdapter adapter;
     private List<Exame> exames;
     private TextView emptyTextView;
     private ExameDAO exameDAO;
+    private String medicoEmail;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,38 +39,27 @@ public class MedicoMainActivity extends AppCompatActivity {
         exameDAO = new ExameDAO(this);
 
         // Lógica para o ícone de Home
-        iconHome.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                reloadHomeContent();
-            }
-        });
+        iconHome.setOnClickListener(v -> reloadHomeContent());
 
         // Lógica para o ícone de Perfil
-        iconPerfil.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Se você ainda deseja implementar o redirecionamento para uma página de perfil, ajuste a implementação aqui
-                Log.i(TAG, "Perfil icon clicked, but PerfilActivity is not implemented.");
-            }
+        iconPerfil.setOnClickListener(v -> {
+            Log.i(TAG, "Perfil icon clicked, but PerfilActivity is not implemented.");
         });
 
         // Lógica para o ícone de adicionar exame
-        imageBottom.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MedicoMainActivity.this, AdicionarExameActivity.class);
-                startActivity(intent);
-            }
+        imageBottom.setOnClickListener(v -> {
+            Intent intent = new Intent(MedicoMainActivity.this, AdicionarExameActivity.class);
+            intent.putExtra("MEDICO_EMAIL", medicoEmail);
+            startActivityForResult(intent, ADD_EXAM_REQUEST_CODE);
         });
 
         // Obtendo o e-mail do médico
         Intent intent = getIntent();
-        String medicoEmail = intent.getStringExtra("medico_email");
+        medicoEmail = intent.getStringExtra("medico_email");
 
         Log.d(TAG, "E-mail do médico: " + medicoEmail);
 
-        if (medicoEmail != null) {
+        if (medicoEmail != null && !medicoEmail.isEmpty()) {
             loadExams(medicoEmail);
         } else {
             Log.e(TAG, "No medico email found in Intent");
@@ -106,11 +96,19 @@ public class MedicoMainActivity extends AppCompatActivity {
     }
 
     private void reloadHomeContent() {
-        // Recarrega o conteúdo da página inicial
-        Intent intent = getIntent();
-        String medicoEmail = intent.getStringExtra("medico_email");
-        if (medicoEmail != null) {
+        if (medicoEmail != null && !medicoEmail.isEmpty()) {
             loadExams(medicoEmail);
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == ADD_EXAM_REQUEST_CODE && resultCode == RESULT_OK) {
+            // Atualiza a lista de exames ao voltar de AdicionarExameActivity
+            if (medicoEmail != null && !medicoEmail.isEmpty()) {
+                loadExams(medicoEmail);
+            }
         }
     }
 }
