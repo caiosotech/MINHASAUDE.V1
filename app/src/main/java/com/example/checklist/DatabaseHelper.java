@@ -7,7 +7,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 public class DatabaseHelper extends SQLiteOpenHelper {
 
     private static final String DATABASE_NAME = "checklist.db";
-    private static final int DATABASE_VERSION = 17; // Versão atual do banco de dados
+    private static final int DATABASE_VERSION = 18; // Versão atual do banco de dados
 
     // Nome das tabelas
     public static final String TABLE_MEDICO = "medico";

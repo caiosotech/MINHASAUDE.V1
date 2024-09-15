@@ -81,7 +81,7 @@ public class LoginActivity extends AppCompatActivity {
             if (paciente.getSenha().equals(password)) {
                 // Redirecionar para a página principal do paciente
                 Intent intent = new Intent(LoginActivity.this, PacienteMainActivity.class);
-                intent.putExtra("email_paciente", email); // Passa o e-mail do paciente para a atividade principal
+                intent.putExtra("paciente_cpf", paciente.getCpf()); // Passa o CPF do paciente para a atividade principal
                 startActivity(intent);
                 finish();
             } else {

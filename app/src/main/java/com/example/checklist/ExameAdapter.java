@@ -1,6 +1,7 @@
 package com.example.checklist;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,8 +9,6 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-import com.example.checklist.Exame;
 
 import java.util.List;
 
@@ -43,16 +42,16 @@ public class ExameAdapter extends ArrayAdapter<Exame> {
 
             // Definindo os valores dos TextViews com base nos métodos da classe Exame
             if (dateTextView != null) {
-                dateTextView.setText(exame.getData());
+                dateTextView.setText(exame.getData()); // Data do Exame
             }
             if (hospitalTextView != null) {
-                hospitalTextView.setText(exame.getNomeHospital());
+                hospitalTextView.setText(exame.getNomeHospital()); // Nome do Hospital
             }
             if (exameTextView != null) {
-                exameTextView.setText(exame.getNomeExame());
+                exameTextView.setText(exame.getNomeExame()); // Nome do Exame
             }
             if (medicoTextView != null) {
-                medicoTextView.setText(exame.getMedicoEmail());
+                medicoTextView.setText(exame.getMedicoEmail()); // Nome do Médico
             }
 
             // Lógica de visibilidade dos ícones de favoritos
@@ -62,6 +61,20 @@ public class ExameAdapter extends ArrayAdapter<Exame> {
             if (favoriteRedImageView != null) {
                 favoriteRedImageView.setVisibility(View.INVISIBLE);
             }
+
+            // Lógica de clique no item
+            convertView.setOnClickListener(v -> {
+                Intent intent = new Intent(context, VisuExameMedico.class);
+                intent.putExtra("nomePaciente", "Nome do Paciente"); // Substitua por dados reais se disponíveis
+                intent.putExtra("cpfPaciente", "CPF do Paciente"); // Substitua por dados reais se disponíveis
+                intent.putExtra("descricaoExame", exame.getNomeExame()); // Ajuste conforme necessário
+                intent.putExtra("nomeHospital", exame.getNomeHospital());
+                intent.putExtra("nomeMedico", exame.getMedicoEmail());
+                intent.putExtra("data", exame.getData());
+                intent.putExtra("hora", "Hora do Exame"); // Substitua por dados reais se disponíveis
+                intent.putExtra("anexo", "Nome do Arquivo"); // Substitua por dados reais se disponíveis
+                context.startActivity(intent);
+            });
         } else {
             Log.e("ExameAdapter", "Exame at position " + position + " is null");
         }

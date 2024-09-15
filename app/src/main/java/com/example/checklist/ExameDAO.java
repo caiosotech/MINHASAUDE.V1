@@ -14,7 +14,7 @@ import java.util.List;
 public class ExameDAO extends SQLiteOpenHelper {
 
     private static final String DATABASE_NAME = "exames.db";
-    private static final int DATABASE_VERSION = 17;
+    private static final int DATABASE_VERSION = 18;
 
     private static final String TABLE_EXAMES = "exames";
     private static final String COLUMN_ID = "id";
