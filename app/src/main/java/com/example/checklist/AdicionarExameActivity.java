@@ -17,6 +17,7 @@ import java.util.Calendar;
 public class AdicionarExameActivity extends AppCompatActivity {
 
     private static final int PICK_FILE_REQUEST_CODE = 1;
+    private static final String TAG = "AdicionarExameActivity";
 
     private EditText nomePacienteEditText;
     private EditText cpfPacienteEditText;
@@ -28,10 +29,10 @@ public class AdicionarExameActivity extends AppCompatActivity {
     private Button anexarArquivoButton;
     private Button cancelarButton;
     private Button salvarButton;
-    private ImageView estrelaImageView;
 
     private String medicoEmail; // Armazena o e-mail do médico
     private ExameDAO exameDAO; // Variável para o ExameDAO
+    private Uri uriAnexo; // Variável para armazenar o Uri do anexo
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,7 +50,6 @@ public class AdicionarExameActivity extends AppCompatActivity {
         anexarArquivoButton = findViewById(R.id.anexarArquivoButton);
         cancelarButton = findViewById(R.id.cancelarButton);
         salvarButton = findViewById(R.id.salvarButton);
-        estrelaImageView = findViewById(R.id.estrelaImageView);
 
         // Inicializa o ExameDAO
         exameDAO = new ExameDAO(this);
@@ -58,7 +58,7 @@ public class AdicionarExameActivity extends AppCompatActivity {
         medicoEmail = getIntent().getStringExtra("MEDICO_EMAIL");
 
         // Adicione um log para verificar o e-mail do médico recebido
-        Log.d("AdicionarExameActivity", "E-mail do médico recebido: " + medicoEmail);
+        Log.d(TAG, "E-mail do médico recebido: " + medicoEmail);
 
         // Configura os listeners
         dataEditText.setOnClickListener(v -> showDatePicker());
@@ -67,7 +67,6 @@ public class AdicionarExameActivity extends AppCompatActivity {
         cancelarButton.setOnClickListener(v -> finish());  // Fecha a activity
         salvarButton.setOnClickListener(v -> saveExame());
 
-        estrelaImageView.setOnClickListener(v -> toggleFavorito());
     }
 
     private void showDatePicker() {
@@ -105,10 +104,13 @@ public class AdicionarExameActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == PICK_FILE_REQUEST_CODE && resultCode == RESULT_OK && data != null) {
-            Uri uri = data.getData();
-            if (uri != null) {
-                // Aqui você pode lidar com o arquivo selecionado
-                Toast.makeText(this, "Arquivo selecionado: " + uri.getPath(), Toast.LENGTH_LONG).show();
+            uriAnexo = data.getData(); // Armazena o Uri selecionado
+            if (uriAnexo != null) {
+                Log.d(TAG, "Arquivo selecionado: " + uriAnexo.toString());
+                Toast.makeText(this, "Arquivo selecionado: " + uriAnexo.getPath(), Toast.LENGTH_LONG).show();
+            } else {
+                Log.e(TAG, "Nenhum arquivo selecionado.");
+                Toast.makeText(this, "Nenhum arquivo selecionado.", Toast.LENGTH_SHORT).show();
             }
         }
     }
@@ -122,23 +124,43 @@ public class AdicionarExameActivity extends AppCompatActivity {
         String data = dataEditText.getText().toString().trim();
         String hora = horaEditText.getText().toString().trim();
 
+        Log.d(TAG, "Tentando salvar o exame com os seguintes dados:");
+        Log.d(TAG, "Nome do Paciente: " + nomePaciente);
+        Log.d(TAG, "CPF do Paciente: " + cpfPaciente);
+        Log.d(TAG, "Descrição do Exame: " + descricaoExame);
+        Log.d(TAG, "Nome do Hospital: " + nomeHospital);
+        Log.d(TAG, "Nome do Médico: " + nomeMedico);
+        Log.d(TAG, "Data: " + data);
+        Log.d(TAG, "Hora: " + hora);
+        Log.d(TAG, "E-mail do Médico: " + medicoEmail);
+
         if (nomePaciente.isEmpty() || cpfPaciente.isEmpty() || descricaoExame.isEmpty() ||
                 nomeHospital.isEmpty() || nomeMedico.isEmpty() || data.isEmpty() || hora.isEmpty()) {
             Toast.makeText(this, "Por favor, preencha todos os campos.", Toast.LENGTH_SHORT).show();
+            Log.e(TAG, "Erro: Campos obrigatórios não preenchidos.");
             return;
         }
 
-        Exame exame = new Exame(descricaoExame, data, nomeHospital, medicoEmail, cpfPaciente);
-        exameDAO.adicionarExame(exame);
+        String anexo = (uriAnexo != null) ? uriAnexo.toString() : ""; // Converte o Uri para String, se não for nulo
 
-        // Define o resultado para indicar que a lista precisa ser atualizada
+        Exame exame = new Exame(data, nomeHospital, medicoEmail, nomeMedico, cpfPaciente, descricaoExame, hora, anexo, nomePaciente);
+        Log.d(TAG, "Criado objeto Exame: " + exame.toString());
+
+        boolean sucesso = exameDAO.adicionarExame(exame);
+
+        if (sucesso) {
+            Log.d(TAG, "Exame salvo com sucesso!");
+            Toast.makeText(this, "Exame salvo com sucesso!", Toast.LENGTH_SHORT).show();
+        } else {
+            Log.e(TAG, "Falha ao salvar o exame.");
+            Toast.makeText(this, "Erro ao salvar exame.", Toast.LENGTH_SHORT).show();
+        }
+
         Intent resultIntent = new Intent();
         resultIntent.putExtra("EXAME_ADICIONADO", true);
         setResult(RESULT_OK, resultIntent);
-        Toast.makeText(this, "Exame salvo com sucesso!", Toast.LENGTH_SHORT).show();
         finish();  // Fecha a activity após salvar o exame
     }
-
 
     private void toggleFavorito() {
         // Adicione a lógica para favoritar ou desfavoritar o exame

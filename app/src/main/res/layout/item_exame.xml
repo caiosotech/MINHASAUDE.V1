@@ -21,26 +21,8 @@
         android:layout_marginTop="0dp">
 
         <!-- Ícone de Favorito (Estrela Normal) -->
-        <ImageView
-            android:id="@+id/favoriteImageView"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:src="@drawable/iconfav"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="16dp"
-            android:layout_marginTop="10dp"
-            android:visibility="visible" />
 
         <!-- Ícone de Favorito (Estrela Vermelha) -->
-        <ImageView
-            android:id="@+id/favoriteRedImageView"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:src="@drawable/iconfavred"
-            android:layout_marginTop="10dp"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="16dp"
-            android:visibility="visible" />
 
         <!-- Data do Exame -->
         <TextView

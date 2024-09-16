@@ -31,7 +31,6 @@ public class ExameAdapter extends ArrayAdapter<Exame> {
 
         Exame exame = exames.get(position);
 
-        // Verificar se exame não é null
         if (exame != null) {
             TextView dateTextView = convertView.findViewById(R.id.dateTextView);
             TextView hospitalTextView = convertView.findViewById(R.id.hospitalTextView);
@@ -40,21 +39,19 @@ public class ExameAdapter extends ArrayAdapter<Exame> {
             ImageView favoriteImageView = convertView.findViewById(R.id.favoriteImageView);
             ImageView favoriteRedImageView = convertView.findViewById(R.id.favoriteRedImageView);
 
-            // Definindo os valores dos TextViews com base nos métodos da classe Exame
             if (dateTextView != null) {
-                dateTextView.setText(exame.getData()); // Data do Exame
+                dateTextView.setText(exame.getData());
             }
             if (hospitalTextView != null) {
-                hospitalTextView.setText(exame.getNomeHospital()); // Nome do Hospital
+                hospitalTextView.setText(exame.getNomeHospital());
             }
             if (exameTextView != null) {
-                exameTextView.setText(exame.getNomeExame()); // Nome do Exame
+                exameTextView.setText(exame.getDescricaoExame()); // Atualizado para mostrar descrição do exame
             }
             if (medicoTextView != null) {
-                medicoTextView.setText(exame.getMedicoEmail()); // Nome do Médico
+                medicoTextView.setText(exame.getNomeMedico()); // Atualizado para mostrar nome do médico
             }
 
-            // Lógica de visibilidade dos ícones de favoritos
             if (favoriteImageView != null) {
                 favoriteImageView.setVisibility(View.VISIBLE);
             }
@@ -62,17 +59,20 @@ public class ExameAdapter extends ArrayAdapter<Exame> {
                 favoriteRedImageView.setVisibility(View.INVISIBLE);
             }
 
-            // Lógica de clique no item
+            // Adiciona um log para verificar o valor do anexo
+            String anexo = exame.getAnexo();
+            Log.d("ExameAdapter", "Anexo para exame na posição " + position + ": " + anexo);
+
             convertView.setOnClickListener(v -> {
                 Intent intent = new Intent(context, VisuExameMedico.class);
-                intent.putExtra("nomePaciente", "Nome do Paciente"); // Substitua por dados reais se disponíveis
-                intent.putExtra("cpfPaciente", "CPF do Paciente"); // Substitua por dados reais se disponíveis
-                intent.putExtra("descricaoExame", exame.getNomeExame()); // Ajuste conforme necessário
+                intent.putExtra("nomePaciente", exame.getNomePaciente()); // Atualizado
+                intent.putExtra("cpfPaciente", exame.getPacienteCPF()); // Atualizado
+                intent.putExtra("descricaoExame", exame.getDescricaoExame()); // Atualizado
                 intent.putExtra("nomeHospital", exame.getNomeHospital());
-                intent.putExtra("nomeMedico", exame.getMedicoEmail());
+                intent.putExtra("nomeMedico", exame.getNomeMedico()); // Atualizado para o nome do médico
                 intent.putExtra("data", exame.getData());
-                intent.putExtra("hora", "Hora do Exame"); // Substitua por dados reais se disponíveis
-                intent.putExtra("anexo", "Nome do Arquivo"); // Substitua por dados reais se disponíveis
+                intent.putExtra("hora", exame.getHora()); // Atualizado
+                intent.putExtra("anexo", anexo); // Atualizado
                 context.startActivity(intent);
             });
         } else {

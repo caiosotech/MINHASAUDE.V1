@@ -102,10 +102,12 @@ public class RegisterPacienteActivity extends AppCompatActivity {
             Toast.makeText(this, "Paciente registrado com sucesso!", Toast.LENGTH_SHORT).show();
             Log.d(TAG, "Paciente registrado com sucesso!");
 
-            // Inicia a nova Activity após o registro bem-sucedido
+            // Após o registro bem-sucedido, inicie a PacienteMainActivity com o CPF do paciente
             Intent intent = new Intent(RegisterPacienteActivity.this, PacienteMainActivity.class);
+            intent.putExtra("paciente_cpf", cpf); // Adiciona o CPF como extra
             startActivity(intent);
             finish(); // Fecha a atividade atual
+
         } else {
             Toast.makeText(this, "Erro ao registrar paciente.", Toast.LENGTH_SHORT).show();
             Log.d(TAG, "Erro ao registrar paciente: resultado = " + resultado);

@@ -6,9 +6,9 @@
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
-        android:icon="@drawable/icontaskbro"
+        android:icon="@drawable/minhasaudelogo"
         android:label="@string/app_name"
-        android:roundIcon="@drawable/icontaskbro"
+        android:roundIcon="@drawable/minhasaudelogo"
         android:supportsRtl="true"
         android:theme="@style/Theme.CheckList"
         tools:targetApi="31" >
@@ -78,22 +78,11 @@
         </activity>
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     </application>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+
+
+
 </manifest>

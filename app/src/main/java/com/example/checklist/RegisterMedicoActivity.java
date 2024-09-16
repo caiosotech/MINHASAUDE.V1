@@ -99,6 +99,7 @@ public class RegisterMedicoActivity extends AppCompatActivity {
 
             // Pass email to MedicoMainActivity
             Intent intent = new Intent(RegisterMedicoActivity.this, MedicoMainActivity.class);
+            intent.putExtra("medico_email", email); // Passa o e-mail do médico para a atividade principal
             startActivity(intent);
             finish();
         } else {

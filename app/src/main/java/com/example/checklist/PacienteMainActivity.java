@@ -15,7 +15,7 @@ import java.util.List;
 public class PacienteMainActivity extends AppCompatActivity {
 
     private static final String TAG = "PacienteMainActivity";
-    private ImageView iconHome, iconPerfil;
+    private ImageView iconHome;
     private ListView listViewExames;
     private ExameAdapter adapter;
     private List<Exame> exames;
@@ -30,7 +30,6 @@ public class PacienteMainActivity extends AppCompatActivity {
 
         // Referências aos ícones e componentes da interface
         iconHome = findViewById(R.id.iconHome);
-        iconPerfil = findViewById(R.id.iconPerfil);
         listViewExames = findViewById(R.id.listViewExames);
         emptyTextView = findViewById(R.id.emptyTextView);
         searchEditText = findViewById(R.id.searchEditText);
@@ -50,14 +49,7 @@ public class PacienteMainActivity extends AppCompatActivity {
             }
         });
 
-        // Lógica para o ícone de Perfil
-        iconPerfil.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Log indicando que o ícone de perfil foi clicado
-                Log.i(TAG, "Perfil icon clicked, but PerfilActivity is not implemented.");
-            }
-        });
+
 
         // Configurar a pesquisa
         searchEditText.setOnEditorActionListener((textView, i, keyEvent) -> {
@@ -84,7 +76,6 @@ public class PacienteMainActivity extends AppCompatActivity {
             if (!exames.isEmpty()) {
                 Log.d(TAG, "Exames encontrados para o paciente: " + pacienteCPF);
                 for (Exame exame : exames) {
-                    Log.d(TAG, "Exame: " + exame.getNomeExame() + ", Data: " + exame.getData());
                 }
                 adapter = new ExameAdapter(this, exames);
                 listViewExames.setAdapter(adapter);
@@ -110,7 +101,6 @@ public class PacienteMainActivity extends AppCompatActivity {
             if (!exames.isEmpty()) {
                 Log.d(TAG, "Exames encontrados com a consulta: " + query);
                 for (Exame exame : exames) {
-                    Log.d(TAG, "Exame: " + exame.getNomeExame() + ", Data: " + exame.getData());
                 }
                 adapter = new ExameAdapter(this, exames);
                 listViewExames.setAdapter(adapter);

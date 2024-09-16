@@ -189,6 +189,16 @@
                 android:layout_marginTop="5dp" />
 
             <Button
+                android:id="@+id/buttonBaixarAnexo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Baixar Anexo"
+                android:layout_marginTop="10dp"
+                android:layout_gravity="center_horizontal"
+                android:backgroundTint="#3D7268"
+                android:textColor="#FFFFFF" />
+
+            <Button
                 android:id="@+id/buttonVoltar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
